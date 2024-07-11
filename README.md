@@ -1,4 +1,4 @@
-# KintoneOpenDate
+# KintoneOpenToday
 
 ## Kintone 本日日付(半)自動更新プラグイン
 
