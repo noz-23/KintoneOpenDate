@@ -1,0 +1,44 @@
+<section id="plugin_setting_form" class="settings">
+  <h2 id="plugin_titile" class="settings-heading">{{html:lang.plugin_titile}}</h2>
+  <p id="plugin_description" class="kintoneplugin-desc">{{html:lang.plugin_description}}</p>
+  <form class="js-submit-settings">
+    <p class="kintoneplugin-row">
+      <label class="kintoneplugin-label">{{html:lang.label_plugin}}</label>
+    </p>
+    <div display="flex;" style="background-color: coral;">
+      <label class="kintoneplugin-label">{{html:lang.label_message}}</label>
+      <div class="kintoneplugin-text">
+        <input type="text" class="kintoneplugin-input-text" id="find_text" value="更新日付:" />
+      </div>
+    </div>
+    <div display="flex;" style="background-color: aquamarine;">
+      <div class="kintoneplugin-input-checkbox">
+        <span class="kintoneplugin-input-checkbox-item">
+          <input type="checkbox" id="timer_checkbox" checked>
+          <label for="timer_checkbox">{{html:lang.value_show}}</label>
+        </span>
+      </div>
+      <label class="kintoneplugin-label">{{html:lang.label_date}}</label>
+      <div class="kintoneplugin-select">
+        <select id="date_field">
+          <option value="">---</option>
+        </select>
+      </div>
+    </div>
+    <p class="kintoneplugin-row">
+      <button type="button" id="plugin_cancel"
+        class="kintoneplugin-button-dialog-cancel">{{html:lang.plugin_cancel}}</button>
+      <button type="button" id="plugin_ok" class="kintoneplugin-button-dialog-ok">{{html:lang.plugin_ok}}</button>
+    </p>
+  </form>
+  <!-- ↓ は広告なので 削除したい人は削除して使って下さい -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8848137110933190"
+    crossorigin="anonymous"></script>
+  <!-- KintoneDisplay -->
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8848137110933190" data-ad-slot="3643192887"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+  <!-- ↑ は広告なので 削除したい人は削除して使って下さい -->
+</section>

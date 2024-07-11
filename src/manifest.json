@@ -1,0 +1,47 @@
+{
+  "manifest_version": 1,
+  "version": "0.1.0",
+  "type": "APP",
+  "name": {
+    "en": "KintoneOpenToday",
+    "ja": "日付の(半)自動更新"
+  },
+  "description": {
+    "en": "KintoneOpenToday",
+    "ja": "日付の(半)自動更新"
+  },
+  "icon": "image/icon.png",
+  "homepage_url": {
+    "en": "https://github.com/noz-23/KintoneOpenToday",
+    "ja": "https://github.com/noz-23/KintoneOpenToday"
+  },
+  "desktop": {
+    "js": [
+      "https://js.cybozu.com/jquery/3.7.1/jquery.min.js",
+      "https://js.cybozu.com/jsrender/1.0.13/jsrender.min.js",
+      "https://js.cybozu.com/kintone-rest-api-client/3.2.1/KintoneRestAPIClient.min.js",
+      "js/desktop.js"
+    ],
+    "css": [
+      "css/51-modern-default.css",
+      "css/desktop.css"
+    ]
+  },
+  "config": {
+    "html": "html/config.html",
+    "js": [
+      "https://js.cybozu.com/jquery/3.7.1/jquery.min.js",
+      "https://js.cybozu.com/jsrender/1.0.13/jsrender.min.js",
+      "js/config.js"
+    ],
+    "css": [
+      "css/51-modern-default.css",
+      "css/config.css"
+    ],
+    "required_params": [
+      "paramTextFind",
+      "paramCheckTimer",
+      "paramFieldDate"
+    ]
+  }
+}
