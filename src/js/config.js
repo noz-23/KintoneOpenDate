@@ -16,7 +16,7 @@
  * 
  * History
  *  2024/07/03 0.1.0 初版とりあえずバージョン
- *
+ *  2024/08/23 0.1.1 空更新するフィールドを追加(ルックアップ対応)
  */
 
 jQuery.noConflict();
@@ -28,6 +28,7 @@ jQuery.noConflict();
   const ParameterTextFind = 'paramTextFind';  // 更新表示
   const ParameterCheckTimer = 'paramCheckTimer';  // 更新表示
   const ParameterFieldDate = 'paramFieldDate';      // 日付フィールド
+  const ParameterFieldEmpty = 'paramFieldEmpty' // 空更新フィールド
 
   // 環境設定
   const Parameter = {
@@ -39,6 +40,7 @@ jQuery.noConflict();
         label_plugin: 'Please Setting Calculate and Date Field',
         label_message: 'Update Date(Find Text)',
         label_date: 'Date Field      ',
+        label_empty: "Empty Renew Field",
         value_show: 'Show Timer',
         plugin_cancel: 'Cancel',
         plugin_ok: ' Save ',
@@ -49,6 +51,7 @@ jQuery.noConflict();
         label_plugin: '計算フィールドと日付フィールドを設定して下さい',
         label_message: '更新日付(検索用文字列)',
         label_date: '日付 フィールド',
+        label_empty: "空更新 フィールド",
         value_show: 'タイマー表示',
         plugin_cancel: 'キャンセル',
         plugin_ok: '   保存  ',
@@ -65,8 +68,9 @@ jQuery.noConflict();
     },
     Elements: {
       FindText: '#find_text',
-      TimerCheckBox:'#timer_checkbox',
-      DateField: '#date_field',
+      CheckBoxTimer: '#checkbox_timer',
+      FieldDate: '#field_date',
+      FieldEmpty: '#field_empty',
     },
   };
 
@@ -125,8 +129,28 @@ jQuery.noConflict();
           const option = jQuery('<option/>');
           option.attr('value', escapeHtml(prop.code)).text(escapeHtml(prop.label));
 
-          console.log("Add DATE option:%o", option);
-          jQuery(Parameter.Elements.DateField).append(option);
+          //console.log("Add DATE option:%o", option);
+          jQuery(Parameter.Elements.FieldDate).append(option);
+        }
+
+        if (prop.type === 'SINGLE_LINE_TEXT' // 文字列（1行）
+          || prop.type === 'MULTI_LINE_TEXT'  // 文字列（複数行）
+          || prop.type === 'RICH_TEXT' // リッチエディター
+          || prop.type === 'NUMBER' // 数値
+          || prop.type === 'CHECK_BOX' // チェックボックス
+          || prop.type === 'RADIO_BUTTON' // ラジオボタン
+          || prop.type === 'MULTI_SELECT' // 複数選択
+          || prop.type === 'DROP_DOWN' // ドロップダウン
+          || prop.type === 'DATE' // 日付
+          || prop.type === 'TIME' // 時刻
+          || prop.type === 'DATETIME' // 日時
+          || prop.type === 'LINK' // リンク
+        ) {
+          const option = jQuery('<option/>');
+          option.attr('value', escapeHtml(prop.code)).text(escapeHtml(prop.label));
+
+          //console.log("Add EMPTY option:%o", option);
+          jQuery(Parameter.Elements.FieldEmpty).append(option);
         }
 
       }
@@ -143,10 +167,13 @@ jQuery.noConflict();
         jQuery(Parameter.Elements.FindText).val(nowConfig[ParameterTextFind]);
       }
       if (nowConfig[ParameterCheckTimer]) {
-        jQuery(Parameter.Elements.TimerCheckBox).prop('checked', nowConfig[ParameterCheckTimer] == 'true');
+        jQuery(Parameter.Elements.CheckBoxTimer).prop('checked', nowConfig[ParameterCheckTimer] == 'true');
       }
       if (nowConfig[ParameterFieldDate]) {
-        jQuery(Parameter.Elements.DateField).val(nowConfig[ParameterFieldDate]);
+        jQuery(Parameter.Elements.FieldDate).val(nowConfig[ParameterFieldDate]);
+      }
+      if (nowConfig[ParameterFieldEmpty]) {
+        jQuery(Parameter.Elements.FieldEmpty).val(nowConfig[ParameterFieldEmpty]);
       }
     }
   };
@@ -160,8 +187,9 @@ jQuery.noConflict();
     // 各パラメータの保存
     var config = {};
     config[ParameterTextFind] = jQuery(Parameter.Elements.FindText).val();
-    config[ParameterCheckTimer] =''+jQuery(Parameter.Elements.TimerCheckBox).prop('checked');
-    config[ParameterFieldDate] = jQuery(Parameter.Elements.DateField).val();
+    config[ParameterCheckTimer] = '' + jQuery(Parameter.Elements.CheckBoxTimer).prop('checked');
+    config[ParameterFieldDate] = jQuery(Parameter.Elements.FieldDate).val();
+    config[ParameterFieldEmpty] = jQuery(Parameter.Elements.FieldEmpty).val();
 
     console.log('config:%o', config);
 

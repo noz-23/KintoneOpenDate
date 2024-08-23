@@ -14,13 +14,19 @@
     <div display="flex;" style="background-color: aquamarine;">
       <div class="kintoneplugin-input-checkbox">
         <span class="kintoneplugin-input-checkbox-item">
-          <input type="checkbox" id="timer_checkbox" checked>
-          <label for="timer_checkbox">{{html:lang.value_show}}</label>
+          <input type="checkbox" id="checkbox_timer" checked>
+          <label for="checkbox_timer">{{html:lang.value_show}}</label>
         </span>
       </div>
       <label class="kintoneplugin-label">{{html:lang.label_date}}</label>
       <div class="kintoneplugin-select">
-        <select id="date_field">
+        <select id="field_date">
+          <option value="">---</option>
+        </select>
+      </div>
+      <label class="kintoneplugin-label">{{html:lang.label_empty}}</label>
+      <div class="kintoneplugin-select">
+        <select id="field_empty">
           <option value="">---</option>
         </select>
       </div>

@@ -16,7 +16,7 @@
  * 
  * History
  *  2024/07/03 0.1.0 初版とりあえずバージョン
- *
+ *  2024/08/23 0.1.1 空更新するフィールドを追加(ルックアップ対応)
  */
 
 jQuery.noConflict();
@@ -30,6 +30,7 @@ jQuery.noConflict();
   const findText = config['paramTextFind'];   // 更新表示
   const checkTimer = config['paramCheckTimer'];   // タイマーの表示
   const writeDate = config['paramFieldDate'];     // 日付フィールド名
+  const writeEmpty = config['paramFieldEmpty'];
 
   const EVENTS = [
     //'app.record.create.show', // 作成表示
@@ -58,7 +59,9 @@ jQuery.noConflict();
     if (checkTimer == 'true') {
       // 一覧の上部エレメント取得 
       var headElemnt = kintone.app.getHeaderSpaceElement();
+      //var headElemnt = kintone.app.getHeaderMenuSpaceElement();
       headElemnt.appendChild(divTimer);
+      console.log('divTimer:%o', divTimer);
     }
 
     startDate = await getDescriptionDate(findText);
@@ -156,7 +159,6 @@ jQuery.noConflict();
     2024-07-10
     形式の文字 
    */
-
   const getToDay = () => {
     var date = new Date();
     const year = ('0000' + date.getFullYear()).slice(-4);
@@ -205,6 +207,10 @@ jQuery.noConflict();
       app: kintone.app.getId(),   // アプリ番号
       fields: [writeDate]
     };
+    if (writeEmpty) {
+      paramGet.fields.push(writeEmpty);
+    }
+
     // kintone レコード取得
     var allRecords = await client.record.getAllRecords(paramGet);
     //console.log("allRecords:%o", allRecords);
@@ -217,8 +223,19 @@ jQuery.noConflict();
       records: []
     };
     for (var rec of allRecords) {
-      //console.log("rec:%o", rec);
-      paramUpdate.records.push({ id: rec['$id'].value, record: { [writeDate]: { value: now } } });
+      console.log("rec:%o", rec);
+      var update = {
+        id: rec['$id'].value,
+        record: {
+          [writeDate]: { value: now }
+        }
+      };
+      if (writeEmpty) {
+        update.record[writeEmpty] = { value: rec[writeEmpty].value };
+      }
+      console.log("update:%o", update);
+
+      paramUpdate.records.push(update);
     }
     //console.log("paramUpdate:%o", paramUpdate);
 
